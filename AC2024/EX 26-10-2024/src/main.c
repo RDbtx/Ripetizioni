@@ -1,9 +1,6 @@
 #include "TUTORATO1.h"
-
-
-
-
+#include "TUTORATO2.H"
 int main(void) {
-    ex5_tutorato1();
+    ex9_tutorato2();
     return 0;
 }
