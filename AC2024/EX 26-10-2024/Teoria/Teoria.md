@@ -1,9 +1,8 @@
-Ecco il contenuto di un file `.md` con un riassunto dei temi richiesti. Puoi copiare questo testo e salvarlo in un file `.md`, per esempio `LogicaDigitale.md`.
 
-```markdown
-# Riassunto di Logica Digitale
+# Riassunto di Teoria elementi di informatica
 
-Questo documento fornisce un riassunto dei principali argomenti relativi alla logica digitale, inclusi la costruzione delle tabelle di verità, le tecniche di semplificazione in algebra booleana, la conversione binaria/decimale e decimale/binaria, e la rappresentazione dei numeri in modulo e segno e in complemento a 2.
+Questo documento fornisce un riassunto dei principali argomenti relativi alla logica digitale, inclusi la costruzione delle tabelle di verità,
+le tecniche di semplificazione in algebra booleana, la conversione binaria/decimale e decimale/binaria, e la rappresentazione dei numeri in modulo e segno e in complemento a 2.
 
 ---
 
@@ -15,11 +14,11 @@ Le tabelle di verità sono usate per descrivere tutte le possibili combinazioni 
 3. **Calcola l'output**: per ciascuna combinazione, calcola il risultato della funzione booleana.
    
 **Esempio**: Per la funzione \( F = A \land B \lor \neg A \):
-| A | B | \( \neg A \) | \( A \land B \) | \( F = A \land B \lor \neg A \) |
+| A | B |       A'    |      A*B       |               A+B               |
 |---|---|-------------|----------------|---------------------------------|
-| 0 | 0 | 1           | 0              | 1                               |
+| 0 | 0 | 1           | 0              | 0                               |
 | 0 | 1 | 1           | 0              | 1                               |
-| 1 | 0 | 0           | 0              | 0                               |
+| 1 | 0 | 0           | 0              | 1                               |
 | 1 | 1 | 0           | 1              | 1                               |
 
 ---
@@ -28,11 +27,35 @@ Le tabelle di verità sono usate per descrivere tutte le possibili combinazioni 
 
 L'algebra booleana può essere semplificata per ridurre la complessità delle espressioni logiche. Le tecniche principali includono:
 
-- **Leggi di Identità**: \( A \lor 0 = A \), \( A \land 1 = A \).
-- **Leggi di Complemento**: \( A \lor \neg A = 1 \), \( A \land \neg A = 0 \).
-- **Leggi di De Morgan**: \( \neg (A \land B) = \neg A \lor \neg B \) e \( \neg (A \lor B) = \neg A \land \neg B \).
-- **Teoremi di Assorbimento**: \( A \lor (A \land B) = A \), \( A \land (A \lor B) = A \).
-- **Metodo delle Mappe di Karnough (K-Map)**: utile per semplificare espressioni booleane con 2, 3 o 4 variabili, dove le combinazioni sono organizzate per visualizzare i termini simili e semplificarli.
+## Proprietà
+- **Identità**:
+  - \( A + 0 = A \)
+  - \( A * 1 = A \)
+  
+- **Annichilimento**:
+  - \( A + 1 = 1 \)
+  - \( A * 0 = 0 \)
+  
+- **Complementazione**:
+  - \( A +  A' = 1 \)
+  - \( A * \neg A = 0 \)
+
+- **Idempotenza**:
+  - \( A + A = A \)
+  - \( A \cdot A = A \)
+
+- **Doppia Negazione**:
+  - \( \neg (\neg A) = A \)
+
+- **Distributiva**:
+  - \( A \cdot (B + C) = A \cdot B + A \cdot C \)
+
+- **Assorbimento**:
+  - \( A + (A \cdot B) = A \)
+
+- **Leggi di De Morgan**:
+  - \( \neg (A + B) = \neg A \cdot \neg B \)
+  - \( \neg (A \cdot B) = \neg A + \neg B \)
 
 ---
 
@@ -54,7 +77,7 @@ L'algebra booleana può essere semplificata per ridurre la complessità delle es
 2. **Somma i risultati**.
 
 **Esempio**: Convertire 1101 in decimale:
-   - \( 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0 = 8 + 4 + 0 + 1 = 13 \).
+   - \( 1 * 2^3 + 1 * 2^2 + 0 * 2^1 + 1 * 2^0 = 8 + 4 + 0 + 1 = 13 \).
 
 ---
 
@@ -70,8 +93,28 @@ In questa rappresentazione, il **bit più significativo (MSB)** indica il segno:
 ### Complemento a 2
 Il complemento a 2 è una rappresentazione usata per rappresentare numeri negativi nei sistemi binari, poiché semplifica le operazioni aritmetiche binarie.
 
-1. **Positivi**: rappresentati normalmente.
-2. **Negativi**: inverti tutti i bit del numero positivo, quindi **aggiungi 1** al risultato.
+## Conversione Decimale-Binario
+
+### Numeri Negativi
+1. Prendi il valore assoluto del numero.
+2. Esegui il complemento a 1 (inverto i bit).
+3. Aggiungi 1 al risultato.
+
+### Numeri Positivi
+1. Converti il numero in binario normalmente.
+2. Verifica che il primo bit non sia 1. Se lo è, il numero non è convertibile con quel numero di bit.
+
+---
+
+## Conversione Binario-Decimale
+
+### Numeri Negativi
+1. Inverti tutti i bit.
+2. Aggiungi 1 al risultato.
+3. Converti il risultato in decimale.
+
+### Numeri Positivi
+1. Converti direttamente i bit in decimale.
 
 **Esempio**: Rappresentare \( -5 \) in complemento a 2 con 4 bit:
    - \( +5 = 0101 \)
