@@ -83,17 +83,21 @@ L'algebra booleana può essere semplificata per ridurre la complessità delle es
 
 ## 4. Rappresentazione in Modulo e Segno e in Complemento a 2
 
-### Modulo e Segno
+## Modulo e Segno
 In questa rappresentazione, il **bit più significativo (MSB)** indica il segno: 0 per i numeri positivi e 1 per i numeri negativi. Gli altri bit rappresentano la parte assoluta del numero.
 
 **Esempio**:
    - \( +5 \) in modulo e segno con 4 bit: `0101`
    - \( -5 \) in modulo e segno con 4 bit: `1101`
 
-### Complemento a 2
+ Rappresenta \( 2^{n-1} - 1 \) numeri positivi e \( 2^{n-1} - 1 \) numeri negativi.
+ Non è più comunemente utilizzata poiché è stata sostituita dal complemento a 2.
+
+
+## Complemento a 2
 Il complemento a 2 è una rappresentazione usata per rappresentare numeri negativi nei sistemi binari, poiché semplifica le operazioni aritmetiche binarie.
 
-## Conversione Decimale-Binario
+### Conversione Decimale-Binario
 
 ### Numeri Negativi
 1. Prendi il valore assoluto del numero.
@@ -106,7 +110,7 @@ Il complemento a 2 è una rappresentazione usata per rappresentare numeri negati
 
 ---
 
-## Conversione Binario-Decimale
+### Conversione Binario-Decimale
 
 ### Numeri Negativi
 1. Inverti tutti i bit.
