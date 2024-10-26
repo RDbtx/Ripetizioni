@@ -13,7 +13,7 @@ Le tabelle di verità sono usate per descrivere tutte le possibili combinazioni 
 2. **Elenca le combinazioni di input**: per \( n \) variabili, ci sono \( 2^n \) combinazioni.
 3. **Calcola l'output**: per ciascuna combinazione, calcola il risultato della funzione booleana.
    
-**Esempio**: Per la funzione \( F = A \land B \lor \neg A \):
+**Esempio**:
 | A | B |       A'    |      A*B       |               A+B               |
 |---|---|-------------|----------------|---------------------------------|
 | 0 | 0 | 1           | 0              | 0                               |
@@ -38,24 +38,24 @@ L'algebra booleana può essere semplificata per ridurre la complessità delle es
   
 - **Complementazione**:
   - \( A +  A' = 1 \)
-  - \( A * \neg A = 0 \)
+  - \( A *  A' = 0 \)
 
 - **Idempotenza**:
   - \( A + A = A \)
-  - \( A \cdot A = A \)
+  - \( A * A = A \)
 
 - **Doppia Negazione**:
-  - \( \neg (\neg A) = A \)
+  - \( (A')' = A \)
 
 - **Distributiva**:
-  - \( A \cdot (B + C) = A \cdot B + A \cdot C \)
+  - \( A * (B + C) = A * B + A * C \)
 
 - **Assorbimento**:
-  - \( A + (A \cdot B) = A \)
+  - \( A + (A * B) = A \)
 
 - **Leggi di De Morgan**:
-  - \( \neg (A + B) = \neg A \cdot \neg B \)
-  - \( \neg (A \cdot B) = \neg A + \neg B \)
+  - \(  (A + B)' =  A' * B' \)
+  - \(  (A * B)' =  A' + B' \)
 
 ---
 
