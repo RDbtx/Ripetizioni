@@ -28,3 +28,21 @@ I caratteri vengono memorizzati usando il tipo char, che rappresenta singoli car
 
 - **`float`**: occupa 1 byte (8 bit), con un intervallo tipicamente da -128 a 127 (signed) o da 0 a 255 (unsigned).
 - **`signed char e unsigned char`**: varianti del tipo char per rappresentare rispettivamente caratteri con segno o senza segno.
+
+
+## 2. Principali Specificatori di Formato in C.
+
+- **`%d`**: Rappresenta un intero decimale con segno (int).
+- **`%i`**: Simile a %d, può essere usato anche per interi con segno.
+- **`%u`**: Rappresenta un intero decimale senza segno (unsigned int).
+- **`%o`**: Rappresenta un numero in ottale (base 8).
+- **`%x o %X`**: Rappresenta un numero esadecimale (base 16), con lettere minuscole (%x) o maiuscole (%X) per cifre da 10 a 15.
+- **`%f`**: Stampa un numero in virgola mobile a precisione singola (float) o doppia (double).
+- **`%e o %E`**: Stampa un numero in notazione scientifica (esponente), con lettere e o E.
+- **`%g o %G`**: Seleziona automaticamente tra notazione normale e scientifica, scegliendo quella più compatta.
+- **`%c`**: Stampa un singolo carattere (char).
+- **`%s`**: Stampa una stringa di caratteri (char array o char *).
+- **`%p`**: Stampa un indirizzo di memoria. Viene usato per puntatori.
+- **`%ld, %lld`**: Per interi long o long long.
+- **`%hd`**: Per interi short.
+- **`%Lf`**: Per long double.
