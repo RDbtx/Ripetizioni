@@ -11,6 +11,8 @@ void ex1_tutorato1() {
 
     printf("Inserisci una variabile (un carattere alfabetico):\n");
     scanf("%c", &variable);
+
+    //stampo la variabile in %c (per vedere il suo carattere) e in %d (per vedere il suo codice ASCII)
     printf("Il valore ASCII della variabile '%c' e' %d\n", variable, variable);
 }
 
@@ -60,23 +62,31 @@ void ex3_tutorato1() {
 
     int selector;
 
+    //uso il ciclo do while per controllare che i valori in ingresso siano o 1 o 2
     do {
+        //seleziono il formato della temperatura in ingresso, celsius o farenheit
         printf("seleziona il formato:\n-1 CELSIUS\n-2 FARENHEIT\n");
         scanf("%d", &selector);
     } while (selector != 1 && selector != 2);
 
+    //inserisco la temperatura
     printf("TEMP: ");
     scanf("%f", &temp);
 
+    //uso lo switch per capire quale conversione fare in base al valore del selettore
     switch (selector) {
+
+        //se la temperatura in ingresso è in celsius calcolo il corrispondente in fahrenheit
         case 1: fahrenheit = (1.8 * temp + 32);
             celsius = temp;
             break;
+        //se la temperatura in ingresso è in fahrenheit calcolo il corrispondente in celsius
         case 2: fahrenheit = temp;
             celsius = (temp - 32) / 1.8;
             break;
     }
 
+    //stampo le temperature calcolate a schermo
     printf("Celsius: %f\n", celsius);
     printf("farenheit: %f\n", fahrenheit);
 }
@@ -98,18 +108,20 @@ void ex4_tutorato1() {
     float prodotti = 0;
     float divisore = 0;
 
+
+    //uso il ciclo for per salvare nei due array i voti degli esami e i loro pesi
     for (int i = 0; i < 3; i++) {
         printf("inserire voto esame %d:\n", i + 1);
         scanf("%d", &voti_esami[i]);
         printf("inserire peso esame %d:\n", i + 1);
         scanf("%d", &valore_esami[i]);
 
+        //calcolo parzialmente gli elementi della formula della media
         prodotti = prodotti + (valore_esami[i] * voti_esami[i]);
         divisore = divisore + valore_esami[i];
     };
 
-    printf("prodotti: %.2f\n", prodotti);
-    printf("divisore: %.2f\n", divisore);
+    //calcolo la media ponderata e la stampo a schermo
     media_ponderata = (prodotti / divisore);
     printf("media ponderata = %.3f", media_ponderata);
 }
@@ -123,8 +135,10 @@ video anche la super cie e il volume di tale sfera.
 */
 
 void ex5_tutorato1() {
-#define PI 3.14159
+
     float raggio;
+    //definisco PI scrivendo const davanti poichè il suo valore non deve variare durante l'esecuzione del programma
+    const float PI = 3.14159;
 
     // Input del raggio
     printf("Inserisci il raggio del cerchio/sfera: \n ");
@@ -143,4 +157,24 @@ void ex5_tutorato1() {
     printf("Circonferenza del cerchio: %.2f\n", circonferenza);
     printf("Superficie della sfera: %.2f\n", superficie_sfera);
     printf("Volume della sfera: %.2f\n", volume_sfera);
+}
+
+
+
+void ex_scambio_variabili() {
+    int a = 15;
+    int b = 20;
+
+    //creao il valore temp per non perdere i valori di a e b durante lo scambio
+    int temp;
+
+    //salvo a in temp: temp = 15
+    temp = a;
+    //sovrascrivo a con il valore di b: a = 20
+    a = b;
+    //spvrascrivo b con il valore di a che è stato salvato in temp: b = 15
+    b = temp;
+
+    printf("a = %d  b = %d", a, b);
+
 }
