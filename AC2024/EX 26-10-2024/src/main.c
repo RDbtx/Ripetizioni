@@ -12,7 +12,5 @@
 
 
 int main(void) {
-    ex2_for();
-
     return 0;
 }
