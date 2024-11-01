@@ -1,7 +1,18 @@
+#include <ctype.h>
+
 #include "TUTORATO1.h"
-#include "TUTORATO2.H"
+#include "TUTORATO2.h"
 #include "TUTORATO3.h"
+#include "FOR_STRINGS.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+
+
 int main(void) {
-    ex12_tutorato3();
+    ex2_for();
+
     return 0;
 }
