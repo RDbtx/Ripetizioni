@@ -43,11 +43,9 @@ void ex2_tutorato2() {
 
     if (are_equal == 0) {
         printf("le stringhe sono identiche");
-    } else if (are_equal > 0) {
-        printf("le stringhe sono identiche");
-    } else if (are_equal < 0) {
-        printf("le stringhe sono identiche");
-    }
+    } else
+        printf("le stringhe sono diverse");
+
 }
 
 /*
@@ -149,14 +147,15 @@ void ex7_tutorato2() {
     int bitstring[length + 1];
     int bit_weight[] = {3, 2, 1, 0};
     for (int i = 0; i < length; i++) {
-        printf("inserire il bit %d: ", i + 1);
+        printf("inserire il bit %d:", i + 1);
         scanf(" %d", &bitstring[i]);
     }
 
     int decimale = 0;
-    for (int i = 0; i < lenght; i++) {
-        decimale = decimale + (bitstring[i] == '1') ? pow(2, bit_weight[i]) : 0;
-    }
+    for (int i = 0; i < length; i++) {
+        if(bitstring[i] == 1) {
+          decimale = decimale + pow(2,bit_weight[i]);
+    }}
 
     printf("\nconversione in decimale di '%d%d%d%d': %d",bitstring[0], bitstring[1], bitstring[2], bitstring[3], decimale);
 }
@@ -180,15 +179,17 @@ void ex8_tutorato2() {
     int decimale = 0;
     if (bitstring[0] == 1) {
         // Se il numero è negativo, calcola il complemento a 2
-        for (int i = 0; i < lenght; i++) {
-            decimale += (bitstring[i] == '0') ? pow(2, bit_weight[i]) : 0;
-        }
+        for (int i = 0; i < length; i++) {
+            if(bitstring[i] == 0) {
+                decimale = decimale + pow(2,bit_weight[i]);
+            }}
         decimale = -(decimale + 1);
     } else {
         // Se è positivo, calcola normalmente
-        for (int i = 0; i < lenght; i++) {
-            decimale = decimale + (bitstring[i] == '1') ? pow(2, bit_weight[i]) : 0;
-        }
+        for (int i = 0; i < length; i++) {
+            if(bitstring[i] == 1) {
+                decimale = decimale + pow(2,bit_weight[i]);
+            }}
     }
 
 
