@@ -14,11 +14,11 @@ SCRIVERE LE RISPOSTE NEI RIQUADRI ASSEGNATI – INDENTARE IL CODICE C
 **Nota**: il massimo punteggio ottenibile risolvendo gli esercizi di questo livello è 23.
 
 ### Esercizio 0.1 (4 punti)
-Scrivere la tabella di verità dell’espressione booleana \( Z = A + \overline{A}B \) e dedurre se essa equivale a qualche operatore noto.
+Scrivere la tabella di verità dell’espressione booleana \( Z = A + A̅B \) e dedurre se essa equivale a qualche operatore noto.
 
 #### Tabella di Verità
 
-| A | B | \( Z = A + ~~{A}B \) |
+| A | B | \( Z = A + A̅B \) |
 |---|---|----------------------------|
 | 0 | 0 | 0                          |
 | 0 | 1 | 1                          |
@@ -26,7 +26,7 @@ Scrivere la tabella di verità dell’espressione booleana \( Z = A + \overline{
 | 1 | 1 | 1                          |
 
 #### Conclusione
-L'espressione \( Z = A + ~~{A}B \) equivale all'operatore OR logico
+L'espressione \( Z = A + A̅B \) equivale all'operatore OR logico
 ---
 
 ### Esercizio 0.2 (3 punti)
