@@ -18,7 +18,7 @@ Scrivere la tabella di verità dell’espressione booleana \( Z = A + \overline{
 
 #### Tabella di Verità
 
-| A | B | \( Z = A + \overline{A}B \) |
+| A | B | \( Z = A + ~~{A}B \) |
 |---|---|----------------------------|
 | 0 | 0 | 0                          |
 | 0 | 1 | 1                          |
@@ -26,7 +26,7 @@ Scrivere la tabella di verità dell’espressione booleana \( Z = A + \overline{
 | 1 | 1 | 1                          |
 
 #### Conclusione
-L'espressione \( Z = A + \overline{A}B \) equivale all'operatore OR logico
+L'espressione \( Z = A + ~~{A}B \) equivale all'operatore OR logico
 ---
 
 ### Esercizio 0.2 (3 punti)
@@ -48,42 +48,32 @@ dove `<m>` e `<q>` sono i valori calcolati.
 #### Codice in C
 
 ```c
-#define len 2
-float x[len];
-float y[len];
+int main() {
+float x1,x2,y1,y2;
 
-do {
-    for (int i = 0; i < len; i = i + 1) {
-        printf("inserire l'ascissa X del punto %d:\n", i + 1);
-        scanf("%f", &x[i]);
-        printf("inserire l'ordinata Y del punto %d:\n", i + 1);
-        scanf("%f", &y[i]);
-    }
-} while (x[0] == y[0] && x[1] == y[1]);
 
-float distanza;
-float quota;
-float coefficiente_angolare;
-float traslazione;
+    float coefficiente_angolare;
+    float traslazione;
 
-// controllo le posizioni dei dati inseriti
-if (x[0] > x[1]) {
-    distanza = x[0] - x[1];
-} else
-    distanza = x[1] - x[0];
+  	printf("Inserire le coordinate (x1, y1)");
+    scanf("%f %f",&x1,&y1);
+    printf("Inserire le coordinate (x2, y2)");
+    scanf("%f %f",&x2,&y2);
 
-if (y[0] > y[1]) {
-    quota = y[0] - y[1];
-} else
-    quota = y[1] - y[0];
+	if(x1==x2 && y1==y2) {
+          printf("Errore, retta verticale");
+          return 0;
+	}
+    // calcolo m e q
+    coefficiente_angolare = (y2-y1)/(x2-x1);
+    traslazione = y1 - coefficiente_angolare* x1;
 
-// calcolo m e q
-coefficiente_angolare = (quota / distanza);
-traslazione = y[0] / (coefficiente_angolare * x[0]);
+    printf("FUNZIONE: Y = %.2fX + %.2f\n", coefficiente_angolare, traslazione);
+    printf("COEFF ANGOLARE: %.5f\n", coefficiente_angolare);
+    printf("TRASLAZIONE RETTA: %.5f\n", traslazione);
+    return 0;
+}
 
-printf("FUNZIONE: Y = %.2fX + %.2f\n", coefficiente_angolare, traslazione);
-printf("COEFF ANGOLARE: %.5f\n", coefficiente_angolare);
-printf("TRASLAZIONE RETTA: %.5f\n", traslazione);
 ```
 
 ---
@@ -121,14 +111,21 @@ Scrivere il frammento di codice da aggiungere all’esercizio 0.3 che calcola l�
 #### Codice
 
 ```c
-#include <stdio.h>
-#include <math.h>
+ int main() {
+    float a, b, c, x1, x2;
 
-int main() {
-    float a, b, c, delta, x1, x2;
+    printf("inserire il coefficente A:\n");
+    scanf("%f", &a);
+    printf("inserire il coefficente B:\n");
+    scanf("%f", &b);
+    printf("inserire il coefficente C:\n");
+    scanf("%f", &c);
 
-    printf("Inserisci i coefficienti a, b, c della parabola (con a diverso da 0): ");
-    scanf("%f %f %f", &a, &b, &c);
+
+    // y = ax^2+bx+c
+    // calcolo gli zeri
+    float delta = sqrt(pow(b, 2) - 4 * a * c);
+
 
     if (a == 0) {
         printf("Il valore di 'a' deve essere diverso da 0.\n");
@@ -142,16 +139,14 @@ int main() {
     } else {
         x1 = (-b - sqrt(delta)) / (2 * a);
         x2 = (-b + sqrt(delta)) / (2 * a);
-
-        if (a > 0) {
-            printf("La parabola è negativa per x appartenente all'intervallo: (%.2f, %.2f)\n", x1, x2);
-        } else {
-            printf("La parabola è negativa per x non appartenente all'intervallo: (%.2f, %.2f)\n", x1, x2);
-        }
-    }
-
+	}
+    //controllo l'andamento della funzione
+    if (a < 0) {
+        printf("la funzione e' negativa per [X < %.2f & X >%.2f]", x1, x2);
+    } else printf("la funzione e' negativa per [%.2f< X <%.2f]", x1, x2);
     return 0;
 }
+    
 ```
 ---
 
@@ -163,51 +158,43 @@ Completare il programma dell’esercizio 1.2, facendo sì che venga chiesta iter
 Aggiungere al programma precedente il frammento di codice che calcola l’ampiezza minima di tutti gli intervalli interni calcolati nei quali il segno della parabola risulta strettamente positivo. Per esempio, dato un intervallo interno \( I = (x_1, x_2) \), per cui si ha \( y = ax^2 + bx + c > 0 \), l’ampiezza è data da \( \sqrt{(x_1 - x_2)^2} \).
 
 ```c
-#define len 3
-#define zerilen 2
-float coefficenti[len];
-char coefficenti_name[] = {'A', 'B', 'C'};
+int main() {
+  #define lenght 3
+	float coeff[lenght];
+    char coeff_name[] = {'a','b','c'};
+    float delta, x1, x2;
 
-for (int i = 0; i < len; i++) {
-    printf("inserire il coefficente %c:\n", coefficenti_name[i]);
-    scanf("%f", &coefficenti[i]);
+    for(int i = 0; i < lenght; i++) {
+        printf("Inserisci il coefficiente %c della parabola",coeff_name[i]);
+        scanf("%f", &coeff[i]);
+		}
+
+        if (coeff[0] == 0) {
+            printf("Errore! A=0.\n");
+            return 0;
+        }
+
+        delta = coeff[1] * coeff[1] - 4 * coeff[0] * coeff[2];
+
+        if (delta <= 0) {
+            printf("Delta non valido o nullo. Programma terminato.\n");
+            return 0;
+        }
+
+        x1 = (-coeff[1] - sqrt(delta)) / (2 * coeff[0]);
+        x2 = (-coeff[1] + sqrt(delta)) / (2 * coeff[0]);
+
+        if (coeff[0] > 0) {
+
+            printf("La parabola è negativa per x appartenente all'intervallo: (%.2f, %.2f)\n", x1, x2);
+
+        } else {
+          	float ampiezza = x2-x1;
+            printf("La parabola è negativa per x non appartenente all'intervallo: (%.2f, %.2f)\n", x1, x2);
+            printf("l' ampiezza intervallo positivo e' = %.2f\n", ampiezza);
+        }
+    return 0;
 }
-printf("\n%.2f\n%.2f\n", coefficenti[0], coefficenti[1]);
 
-if (coefficenti[0] == 0) {
-    printf("ERROR = A < 0");
-    return 1;
-}
-
-// y = ax^2 + bx + c
-// calcolo gli zeri
-float delta = sqrt(pow(coefficenti[1], 2) - 4 * coefficenti[0] * coefficenti[2]);
-if (delta < 0 || delta == 0) {
-    printf("ERROR = DELTA NOT VALID");
-    return 1;
-}
-float zeri[zerilen];
-
-zeri[0] = (-coefficenti[1] + delta) / (2 * coefficenti[0]);
-zeri[1] = (-coefficenti[1] - delta) / (2 * coefficenti[0]);
-printf("\n%.2f\n%.2f\n", zeri[0], zeri[1]);
-
-// metto in ordine gli zeri
-if (zeri[0] > zeri[1]) {
-    float temp = zeri[1];
-    zeri[1] = zeri[0];
-    zeri[0] = temp;
-}
-
-// controllo l'andamento della funzione tramite il valore A
-if (coefficenti[0] < 0) {
-    printf("la funzione e' negativa per [X < %.2f & X > %.2f]\n", zeri[0], zeri[1]);
-    // calcolo l'intervallo interno
-    float intervallo;
-    intervallo = sqrt((zeri[1] - zeri[0]));
-    printf("l'intervallo positivo e' ampio [%.4f]\n", intervallo);
-} else {
-    printf("la funzione e' negativa per [%.2f < X < %.2f]", zeri[0], zeri[1]);
-}
 ```
 ---
