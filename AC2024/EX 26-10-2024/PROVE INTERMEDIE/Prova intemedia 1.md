@@ -49,13 +49,12 @@ dove `<m>` e `<q>` sono i valori calcolati.
 
 ```c
 int main() {
-float x1,x2,y1,y2;
-
-
+    float x1,x2,y1,y2;
     float coefficiente_angolare;
     float traslazione;
 
-  	printf("Inserire le coordinate (x1, y1)");
+    // inserisco le coordinate
+    printf("Inserire le coordinate (x1, y1)");
     scanf("%f %f",&x1,&y1);
     printf("Inserire le coordinate (x2, y2)");
     scanf("%f %f",&x2,&y2);
@@ -68,6 +67,7 @@ float x1,x2,y1,y2;
     coefficiente_angolare = (y2-y1)/(x2-x1);
     traslazione = y1 - coefficiente_angolare* x1;
 
+    //stampo i valori calcolati 
     printf("FUNZIONE: Y = %.2fX + %.2f\n", coefficiente_angolare, traslazione);
     printf("COEFF ANGOLARE: %.5f\n", coefficiente_angolare);
     printf("TRASLAZIONE RETTA: %.5f\n", traslazione);
@@ -114,6 +114,7 @@ Scrivere il frammento di codice da aggiungere all’esercizio 0.3 che calcola l�
  int main() {
     float a, b, c, x1, x2;
 
+    // inserisco i coefficenti dell equazione di secondo grado
     printf("inserire il coefficente A:\n");
     scanf("%f", &a);
     printf("inserire il coefficente B:\n");
@@ -126,20 +127,21 @@ Scrivere il frammento di codice da aggiungere all’esercizio 0.3 che calcola l�
     // calcolo gli zeri
     float delta = sqrt(pow(b, 2) - 4 * a * c);
 
-
+    // se a=0 termino il programma
     if (a == 0) {
-        printf("Il valore di 'a' deve essere diverso da 0.\n");
-        return 1;
+        printf("ERRORE! Il valore di 'A' deve essere diverso da 0.\n");
+        return 0;
     }
-
+    // calcolo il delta, se delta è <= 0 termino il programma
     delta = b * b - 4 * a * c;
-
     if (delta <= 0) {
-        printf("Non ci sono intervalli per cui la parabola è negativa (Delta <= 0).\n");
-    } else {
-        x1 = (-b - sqrt(delta)) / (2 * a);
-        x2 = (-b + sqrt(delta)) / (2 * a);
-	}
+        printf("ERRORE! Delta <= 0).\n");
+	return 0;
+    } 
+    // calcolo gli zeri
+    x1 = (-b - sqrt(delta)) / (2 * a);
+    x2 = (-b + sqrt(delta)) / (2 * a);
+	
     //controllo l'andamento della funzione
     if (a < 0) {
         printf("la funzione e' negativa per [X < %.2f & X >%.2f]", x1, x2);
@@ -160,36 +162,36 @@ Aggiungere al programma precedente il frammento di codice che calcola l’ampiez
 ```c
 int main() {
   #define lenght 3
-	float coeff[lenght];
+    float coeff[lenght];
     char coeff_name[] = {'a','b','c'};
     float delta, x1, x2;
 
+    // inserisco i coefficenti in maniera iterativa tramite l'uso del ciclo for
     for(int i = 0; i < lenght; i++) {
         printf("Inserisci il coefficiente %c della parabola",coeff_name[i]);
         scanf("%f", &coeff[i]);
 		}
-
-        if (coeff[0] == 0) {
-            printf("Errore! A=0.\n");
+     // considero tutte le condizioni di errore, sia per a che per delta   
+     if (coeff[0] == 0) {
+            printf("ERRORE! A=0.\n");
             return 0;
         }
 
-        delta = coeff[1] * coeff[1] - 4 * coeff[0] * coeff[2];
+     delta = coeff[1] * coeff[1] - 4 * coeff[0] * coeff[2];
 
-        if (delta <= 0) {
-            printf("Delta non valido o nullo. Programma terminato.\n");
+     if (delta <= 0) {
+            printf("ERRORE! Delta <= 0\n");
             return 0;
         }
+     // calcolo gli zeri	
+     x1 = (-coeff[1] - sqrt(delta)) / (2 * coeff[0]);
+     x2 = (-coeff[1] + sqrt(delta)) / (2 * coeff[0]);
 
-        x1 = (-coeff[1] - sqrt(delta)) / (2 * coeff[0]);
-        x2 = (-coeff[1] + sqrt(delta)) / (2 * coeff[0]);
-
-        if (coeff[0] > 0) {
-
+     if (coeff[0] > 0) {
             printf("La parabola è negativa per x appartenente all'intervallo: (%.2f, %.2f)\n", x1, x2);
-
         } else {
-          	float ampiezza = x2-x1;
+            // se l'intervallo interno è positivo ne calcolo l'ampiezza e la stampo a schermo
+            float ampiezza = x2-x1;
             printf("La parabola è negativa per x non appartenente all'intervallo: (%.2f, %.2f)\n", x1, x2);
             printf("l' ampiezza intervallo positivo e' = %.2f\n", ampiezza);
         }
