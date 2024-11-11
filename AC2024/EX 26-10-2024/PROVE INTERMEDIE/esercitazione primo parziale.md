@@ -37,9 +37,10 @@ float x1, x2, y1, y2;
 # ESERCIZIO 3
 Convertire il valore -25 nella corrispondente stringa binaria in complemento a 2, utilizzando 8 bit. Spiegare i passi della conversione.
 
-1. Calcolare il valore binario di 25: `00011001`
+1. Calcolare il valore assoluto binario a 8 bit di 25: `00011001`
 2. Invertire tutti i bit: `11100110`
 3. Aggiungere 1: `11100111`
+4. `25 == 11100111`
 
 
 # ESERCIZIO 4
