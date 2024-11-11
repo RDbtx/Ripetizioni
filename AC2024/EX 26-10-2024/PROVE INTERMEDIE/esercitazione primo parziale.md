@@ -14,4 +14,4 @@ Scrivere un frammento di codice C che calcola e stampa l'area di un triangolo da
 Estendere il programma dell'esercizio 1.2 per consentire la determinazione iterativa di aree di diversi triangoli, fino a quando l'utente inserisce un valore negativo per la base o l'altezza.
 
 # ESERCIZIO 6
-Integrare nel programma precedente una funzione che, dati in ingresso tre lati, verifichi se i valori inseriti possono formare un triangolo valido. Se non lo sono, il programma deve terminare e stampare un messaggio appropriato. In caso positivo, calcolare e stampare il perimetro del triangolo.
+Integrare nel programma precedente una funzione che, dati in ingresso tre lati (salvati all interno di un vettore), verifichi se i valori inseriti possono formare un triangolo valido. Se non lo sono, il programma deve terminare e stampare un messaggio appropriato. In caso positivo, calcolare e stampare il perimetro del triangolo.
