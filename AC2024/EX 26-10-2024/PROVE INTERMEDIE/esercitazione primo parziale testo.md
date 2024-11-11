@@ -1,5 +1,5 @@
 # ESERCIZIO 1
-Scrivere la tabella di verità dell'espressione booleana Y = A*{notB}+ C e dedurre se essa equivale a qualche operatore noto.
+Scrivere la tabella di verità dell'espressione booleana Y=(A+notB)⋅(notA+B) e dedurre se essa equivale a qualche operatore noto.
 
 # ESERCIZIO 2
 Scrivere un programma in C che, ricevendo da tastiera due coppie di numeri reali, rappresentanti la coordinata y e x di due punti sul piano cartesiano, calcoli la distanza euclidea tra i due punti e stampi il risultato.
