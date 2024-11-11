@@ -1,6 +1,6 @@
 # ESERCIZIO 1
-Scrivere la tabella di verità dell'espressione booleana Y=(A+B^)⋅(A^+B) e dedurre se essa equivale a qualche operatore noto.
-| A | B | Y = (A + ¬B) · (¬A + B) |
+Scrivere la tabella di verità dell'espressione booleana Y=(A+notB)⋅(notA+B) e dedurre se essa equivale a qualche operatore noto.
+| A | B | Y = (A + notB) · (notA + B) |
 |---|---|-------------------------|
 | 0 | 0 |           1             |
 | 0 | 1 |           1             |
