@@ -3,9 +3,9 @@ Scrivere la tabella di verità dell'espressione booleana Y=(A+notB)⋅(notA+B) e
 | A | B | Y = (A + notB) · (notA + B) |
 |---|---|-------------------------|
 | 0 | 0 |           1             |
-| 0 | 1 |           1             |
-| 1 | 0 |           1             |
-| 1 | 1 |           0             |
+| 0 | 1 |           0             |
+| 1 | 0 |           0             |
+| 1 | 1 |           1             |
 
 
 L'equazione rappresenta un NAND
