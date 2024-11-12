@@ -50,16 +50,26 @@ float base, altezza;
 # ESERCIZIO 5
 Estendere il programma dell'esercizio 1.2 per consentire la determinazione iterativa di aree di diversi triangoli, fino a quando l'utente inserisce un valore negativo per la base o l'altezza.
 ```c
-float base, altezza;
-    do {
+    while(1) {
         printf("inserire base:\n");
         scanf("%f", &base);
+
+        if(base <= 0) {
+            printf("ERRORE! valore non valido");
+            break;
+        }
+
         printf("inserire altezza:\n");
         scanf("%f", &altezza);
 
+        if(altezza <= 0) {
+            printf("ERRORE! valore non valido");
+            break;
+        }
+
         float area = (base * altezza) / 2;
         printf("AREA TRIANGOLO = %.2f\n", area);
-    } while (altezza > 0 && base > 0);
+    }
 ```
 # ESERCIZIO 6
 Integrare nel programma precedente una funzione che, dati in ingresso tre lati (salvati all interno di un vettore), verifichi se i valori inseriti possono formare un triangolo valido. Se non lo sono, il programma deve terminare e stampare un messaggio appropriato. In caso positivo, calcolare e stampare il perimetro del triangolo.
