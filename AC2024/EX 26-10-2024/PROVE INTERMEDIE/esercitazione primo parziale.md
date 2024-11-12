@@ -20,16 +20,6 @@ float x1, x2, y1, y2;
     printf("inserire X e Y del secondo numero:\n");
     scanf("%f%f", &x2, &y2);
 
-    if (x1 > x2) {
-        float temp;
-        temp = x2;
-        x2 = x1;
-        x1 = temp;
-        temp = y2;
-        y2 = y1;
-        y1 = temp;
-    }
-
     float distanza = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
     printf("Punto 1: ( %.2f , %.2f )\n", x1, y1);
     printf("Punto 2: ( %.2f , %.2f )\n", x2, y2);
