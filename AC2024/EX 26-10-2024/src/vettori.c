@@ -67,9 +67,9 @@ void ex4_vettori() {
             printf("%d e' presente nel vettore in posizione %d\n", search, i);
             found = true;
         }
-        if (found == false) {
-            printf("L'elemento non e' stato trovato\n");
-        }
+    }
+    if (found == false) {
+        printf("L'elemento non e' stato trovato\n");
     }
 }
 
