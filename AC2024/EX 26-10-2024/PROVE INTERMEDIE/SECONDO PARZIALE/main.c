@@ -1,4 +1,4 @@
-#include "vettori.h"
+
 #include "esercitazioni_secondo_parziale.h"
 #define len 50
 
