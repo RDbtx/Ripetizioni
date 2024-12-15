@@ -64,10 +64,10 @@ come circolare (quindi il carattere che segue 'z' è 'a', e quello che segue 'Z'
 Durante la codifica, si lascino invariati tutti i caratteri non alfabetici.
 Esempio: se il primo file contiene la stringa "CODICESEGRETO", il secondo file conterrà "DPEJDFTFHSFUP"
 */
-void ex3_tutorato5(const char *filename) {
+void ex3_tutorato5(const char *finput const char *foutput) {
 #define MAXLEN 50
     char temp[MAXLEN];
-    FILE *fp = fopen(filename, "r");
+    FILE *fp = fopen(finput, "r");
     if (fp == NULL) {
         printf("Errore file non trovato!");
     }
@@ -94,7 +94,7 @@ void ex3_tutorato5(const char *filename) {
         }
     }
 
-    FILE *foutput = fopen("src/fileoutput.txt", "w");
+    FILE *foutput = fopen(foutput, "w");
     if (foutput == NULL) {
         printf("Errore file non trovato!");
         return;
