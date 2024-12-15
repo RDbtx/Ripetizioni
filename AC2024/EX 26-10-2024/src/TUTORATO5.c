@@ -8,16 +8,18 @@ corrispondente al valore massimo presente nel vettore
 */
 void ex1_tutorato5(const int *vettore, int lenght, char *filename) {
     int max = vettore[0];
+    int max_i = 0;
     for (int i = 1; i < lenght; i++) {
         if (vettore[i] > max) {
             max = vettore[i];
+            max_i = i;
         }
     }
     FILE *fp = fopen(filename, "w");
     if (fp == NULL) {
         printf("File non trovato");
     }
-    fprintf(fp, "%d\n", max);
+    fprintf(fp, "%d\n", max_i);
     fclose(fp);
 }
 
