@@ -1,5 +1,3 @@
-#include "allocazione_dinamica_e_liste.h"
-
 /*
 ESERCIZIO 1:
 Scrivere una funzione somme_cumulative C che, ricevendo in ingresso
@@ -145,4 +143,99 @@ void ex4() {
 
     fclose(fp2);
     free(v);
+}
+
+/*
+Esercizio 5:
+Scrivere un programma C che inserisca in una lista concatenata
+un certo numero di interi fino alla lettura di uno zero
+• Stampare a video tutti i valori letti
+• Modularizzare il codice
+*/
+
+// Funzione ISEMPTY: verifica se la lista è vuota
+int ISEMPTY(lista *lst) {
+    return lst == NULL ? 1 : 0;
+}
+
+// Funzione HEAD: restituisce il valore del nodo in testa
+int HEAD(lista *lst) {
+    if (ISEMPTY(lst)) {
+        printf("La lista è vuota\n");
+        return 1;
+    }
+    return lst->val;
+}
+
+// Funzione TAIL: restituisce il puntatore al nodo successivo
+lista *TAIL(lista *lst) {
+    if (ISEMPTY(lst)) {
+        printf("La lista è vuota\n");
+        exit(1);
+    }
+    return lst->next;
+}
+
+// Funzione CONS: aggiunge un nuovo nodo in testa alla lista
+lista *CONS(int val, lista *lst) {
+    lista *newNode = (lista *) malloc(sizeof(lista));
+    if (newNode == NULL) {
+        printf("Allocazione memoria fallita");
+        exit(1);
+    }
+    newNode->val = val;
+    newNode->next = lst;
+    return newNode;
+}
+
+// Funzione inserisci: legge un valore da tastiera e lo restituisce
+int inserisci() {
+    int valore;
+    printf("Inserire valore:");
+    scanf("%d", &valore);
+    return valore;
+}
+
+// Funzione popola: popola la lista leggendo valori
+lista* popola() {
+    lista *lst = NULL;
+    int valore;
+    printf("Inserire valori (terminare con 0):\n");
+    while (1) {
+        valore = inserisci();
+        if (valore == 0) {
+            break;
+        }
+        lst = CONS(valore, lst);
+    }
+    return lst;
+}
+
+// Funzione stampa: stampa tutti i valori della lista
+void stampa(lista *lst) {
+    if (ISEMPTY(lst)) {
+        printf("La lista è vuota.\n");
+        return;
+    }
+    printf("\nLista:\n");
+    while (!ISEMPTY(lst)) {
+        printf("%d ", HEAD(lst));
+        lst = TAIL(lst);
+    }
+    printf("\n");
+}
+
+// Funzione dealloc: dealloca la memoria della lista
+void dealloc(lista *lst) {
+    while (!ISEMPTY(lst)) {
+        lista *temp = lst;
+        lst = TAIL(lst);
+        free(temp);
+    }
+}
+
+void ex5() {
+    lista *lst = popola();
+    stampa(lst);
+    dealloc(lst);
 }
