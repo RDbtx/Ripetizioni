@@ -1,7 +1,3 @@
-//
-// Created by ricca on 20/12/2024.
-//
-
 #ifndef ALLOCAZIONE_DINAMICA_E_LISTE_H
 #define ALLOCAZIONE_DINAMICA_E_LISTE_H
 
@@ -31,10 +27,19 @@ typedef struct {
     char string[20];
 } struttura;
 
-struttura*  assegna_struttura();
+struttura *assegna_struttura();
 
 void stampa_struttura(struttura *data);
 
-//Esercizio 4
+//Esercizio 4:
+
 void ex4();
-int check_elemento_ex4(int value, int *vettore, int len);
+
+//Esercizio 5:
+
+typedef struct Node {
+    int val;
+    struct Node *next;
+} lista;
+
+void ex5();
