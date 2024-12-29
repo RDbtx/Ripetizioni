@@ -90,7 +90,7 @@ e stampi a video l’elenco delle stringhe, seguito dal valore di occorrenze esp
 */
 
 int ISEMPTY(listaVoti *lst) {
-    return lst == NULL;
+    return lst == NULL ? 1 : 0;
 }
 
 // Funzione HEAD
@@ -147,7 +147,6 @@ void dealloca(listaVoti *lst) {
     while (!ISEMPTY(lst)) {
         listaVoti *temp = lst;
         lst = TAIL(lst);
-        free(temp->preferenza);
         free(temp);
     }
 }
