@@ -31,11 +31,8 @@ void tutorato6_ex2() {
     int *vettore;
     vettore = (int *) malloc(N * sizeof(int));
     for (int i = 0; i < N; i++) {
-        int *temp = (int *) malloc(sizeof(int));
         printf("inserire l'elemento [%d] del vettore:\n", i + 1);
-        scanf("%d", temp);
-        vettore[i] = *temp;
-        free(temp);
+        scanf("%d", &vettore[i]);
     }
     for (int i = 0; i < N; i++) {
         printf("%d ", vettore[i]);;
