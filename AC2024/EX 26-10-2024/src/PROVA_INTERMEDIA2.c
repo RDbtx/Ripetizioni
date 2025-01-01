@@ -130,73 +130,135 @@ quello in corso, utilizzando le funzioni delle parti precedenti che si riterrann
 Nota: le funzioni CONS, TAIL, ISEMPTY, HEAD sono già implementate ed utilizzabili.
 */
 
-int getCitazioniAnnoPiuProssimo(tpubblicazione *pubblicazioni, int n_pubblicazioni, int anno_corrente) {
-    int min_differenza = abs(pubblicazioni[0].anno_pubblicazione - anno_corrente);
-    int citazioni = pubblicazioni[0].numero_citazioni;
+// controlla se la lista è vuota
+int ISEMPTY(ListaRicercatori *lst) {
+    return lst == NULL ? 1 : 0;
+}
 
-    for (int i = 1; i < n_pubblicazioni; i++) {
-        int differenza = abs(pubblicazioni[i].anno_pubblicazione - anno_corrente);
-        if (differenza < min_differenza ||
-            (differenza == min_differenza && pubblicazioni[i].anno_pubblicazione > pubblicazioni[0].anno_pubblicazione)) {
-            min_differenza = differenza;
-            citazioni = pubblicazioni[i].numero_citazioni;
-            }
+// ritorna il nome del ricercatore corrente
+char *HEAD(ListaRicercatori *lst) {
+    if (ISEMPTY(lst)) {
+        printf("La lista è vuota\n");
+        exit(1);
+    }
+    return lst->nome;
+}
+
+// prende il prossimo elemento della lista
+ListaRicercatori *TAIL(ListaRicercatori *lst) {
+    if (ISEMPTY(lst)) {
+        printf("La lista è vuota\n");
+        exit(1);
+    }
+    return lst->next;
+}
+
+// aggiunge un nuovo ricercatore
+ListaRicercatori *CONS(char *nome, int num_pubblicazioni, tpubblicazione *pubblicazioni, ListaRicercatori *lst) {
+    if (num_pubblicazioni > 50) {
+        printf("Numero massimo di pubblicazioni superato (50)\n");
+        exit(1);
     }
 
+    ListaRicercatori *newNode = (ListaRicercatori *) malloc(sizeof(ListaRicercatori));
+    if (newNode == NULL) {
+        printf("Allocazione memoria fallita\n");
+        exit(1);
+    }
+    newNode->nome = strdup(nome);
+    if (newNode->nome == NULL) {
+        printf("Allocazione memoria per il nome fallita\n");
+        free(newNode);
+        exit(1);
+    }
+    newNode->num_pubblicazioni = num_pubblicazioni;
+
+
+    for (int i = 0; i < num_pubblicazioni; i++) {
+        newNode->pubblicazioni[i] = pubblicazioni[i];
+    }
+
+    newNode->next = lst;
+    return newNode;
+}
+
+// restituisce il numero di citazioni avvenute nell anno più vicino a quello dato
+int getCitazioni(tpubblicazione *pubblicazione, int n_pubblicazioni, int anno_corrente) {
+    int min_diff = abs(pubblicazione[0].anno_pubblicazione - anno_corrente);
+    int citazioni = pubblicazione[0].numero_citazioni;
+
+    for (int i = 1; i < n_pubblicazioni; i++) {
+        int differenza = abs(pubblicazione[i].anno_pubblicazione - anno_corrente);
+        if (differenza < min_diff) {
+            min_diff = differenza;
+            citazioni = pubblicazione[i].numero_citazioni;
+        }
+    }
     return citazioni;
 }
 
-void stampaRicercatori(ListaRicercatori *l, int anno_corrente) {
-    while (l != NULL) {
-        printf("Nome Ricercatore: %s\n", l->nome);
-        if (l->n_pubblicazioni > 0) {
-            int citazioni = getCitazioniAnnoPiuProssimo(l->pubblicazioni, l->n_pubblicazioni, anno_corrente);
-            printf("Citazioni anno piu' prossimo: %d\n", citazioni);
+// stampa il ricercatore e il numero di citazioni avvenute nell anno più vicino a quello corrente
+void stampaRicercatori(ListaRicercatori *lst, int anno_corrente) {
+    if (ISEMPTY(lst)) {
+        printf("Lista vuota\n");
+        return;
+    }
+    while (!ISEMPTY(lst)) {
+        printf("Nome: %s\n", HEAD(lst));
+        if (lst->num_pubblicazioni > 0) {
+            int citazioni = getCitazioni(lst->pubblicazioni, lst->num_pubblicazioni, anno_corrente);
+            printf("Citazioni piu vicine all'anno %d: %d citazioni [ avvenute nel %d ]\n", anno_corrente, citazioni,lst->pubblicazioni->anno_pubblicazione);
         } else {
-            printf("Nessuna pubblicazione registrata.\n");
+            printf("Nessuna pubblicazione.\n");
         }
-        l = l->next;
+        lst = TAIL(lst);
     }
 }
 
-// Funzioni per creare e gestire la lista
-ListaRicercatori *creaRicercatore(const char *nome, int n_pubblicazioni, tpubblicazione *pubblicazioni) {
-    ListaRicercatori *nuovo = (ListaRicercatori *)malloc(sizeof(ListaRicercatori));
-    nuovo->nome = strdup(nome);
-    nuovo->n_pubblicazioni = n_pubblicazioni;
-    memcpy(nuovo->pubblicazioni, pubblicazioni, n_pubblicazioni * sizeof(tpubblicazione));
-    nuovo->next = NULL;
-    return nuovo;
+// libera la memoria allocata
+void dealloca(ListaRicercatori *lst) {
+    while (!ISEMPTY(lst)) {
+        ListaRicercatori *temp = lst;
+        lst = TAIL(lst);
+        free(temp);
+    }
 }
 
-ListaRicercatori *aggiungiRicercatore(ListaRicercatori *head, ListaRicercatori *nuovo) {
-    nuovo->next = head;
-    return nuovo;
+//stampa la lista completa
+void stampaLista(ListaRicercatori *lst) {
+    if (ISEMPTY(lst)) {
+        printf("La lista è vuota\n");
+        exit(1);
+    }
+    printf("\nLista dei ricercatori:\n");
+    while (!ISEMPTY(lst)) {
+        printf("\nNome: %s\nNum Pubblicazioni: %d\n", lst->nome, lst->num_pubblicazioni);
+        for (int i = 0; i < lst->num_pubblicazioni; i++) {
+            printf("Pubblicazione %d: Citazioni: %d, Anno: %d\n",
+                   i + 1, lst->pubblicazioni[i].numero_citazioni,
+                   lst->pubblicazioni[i].anno_pubblicazione);
+        }
+        lst = TAIL(lst);
+    }
 }
+
 
 void lvl2_ex2(void) {
-    int anno_corrente;
-
-    // Richiesta dell'anno corrente
-    printf("Inserire l'anno corrente:\n");
-    scanf("%d", &anno_corrente);
-
-    // Creazione dei dati di esempio
-    tpubblicazione pubb1[] = {{15, 2020}, {20, 2022}, {10, 2019}};
-    tpubblicazione pubb2[] = {{5, 2018}, {30, 2023}, {25, 2021}};
-
     ListaRicercatori *ricercatori = NULL;
-    ricercatori = aggiungiRicercatore(ricercatori, creaRicercatore("Ricercatore A", 3, pubb1));
-    ricercatori = aggiungiRicercatore(ricercatori, creaRicercatore("Ricercatore B", 3, pubb2));
 
-    // Stampa dei risultati
-    stampaRicercatori(ricercatori, anno_corrente);
 
-    // Liberazione della memoria
-    while (ricercatori != NULL) {
-        ListaRicercatori *tmp = ricercatori;
-        ricercatori = ricercatori->next;
-        free(tmp->nome);
-        free(tmp);
-    }
+    tpubblicazione pub1[] = {{50, 2023}, {30, 2022}};
+    tpubblicazione pub2[] = {{20, 2021}, {15, 2020}, {10, 2019}};
+
+
+    ricercatori = CONS("Riccardo Deidda", 2, pub1, ricercatori);
+    ricercatori = CONS("Matteo Word", 3, pub2, ricercatori);
+
+
+    stampaRicercatori(ricercatori, 2024);
+    stampaLista(ricercatori);
+
+
+    dealloca(ricercatori);
+
 }
