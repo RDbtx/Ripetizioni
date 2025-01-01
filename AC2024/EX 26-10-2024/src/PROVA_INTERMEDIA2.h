@@ -39,11 +39,11 @@ Si definisca un tipo lista concatenata listaRicercatori di variabili di tipo
 tricercatore definito nell’esercizio 0.2.
 */
 
-typedef struct tricercatore {
+typedef struct ricercatore {
     char *nome;
-    int n_pubblicazioni;
+    int num_pubblicazioni;
     tpubblicazione pubblicazioni[50];
-    struct tricercatore *next;
+    struct ricercatore *next;
 } ListaRicercatori;
 
 //Lvl 2 Ex 2:
