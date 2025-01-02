@@ -76,38 +76,34 @@ Nota 2: se lo si ritiene, si è liberi di modularizzare la struttura della main.
 comporta un punteggio massimo pari a 10 punti. Non è richiesto implementare ogni
 modulo aggiuntivo ma solo descriverne il prototipo/interfaccia
 */
-int trovaAnnoPiuProssimo(tpubblicazione *pubb, int len, int anno_corrente) {
-    int min_diff = abs(pubb[0].anno_pubblicazione - anno_corrente);
-    int anno_piu_prossimo = pubb[0].anno_pubblicazione;
+void stampaCitazioniAnnopiuProssimo(tpubblicazione *pubb, int anno_corrente, int numero_elementi) {
+    int min = abs(pubb[0].anno_pubblicazione - anno_corrente);
+    int numero_citazioni = pubb[0].numero_citazioni;
+    int anno_citazioni = pubb[0].anno_pubblicazione;
 
-    for (int i = 1; i < len; i++) {
-        int diff = abs(pubb[i].anno_pubblicazione - anno_corrente);
-        if (diff < min_diff || (diff == min_diff && pubb[i].anno_pubblicazione > anno_piu_prossimo)) {
-            min_diff = diff;
-            anno_piu_prossimo = pubb[i].anno_pubblicazione;
+    for (int i = 0; i < numero_elementi; i++) {
+        if (abs(pubb[i].anno_pubblicazione - anno_corrente) < min) {
+            min = abs(pubb[i].anno_pubblicazione - anno_corrente);
+            numero_citazioni = pubb[i].numero_citazioni;
+            anno_citazioni = pubb[i].anno_pubblicazione;
         }
     }
-
-    return anno_piu_prossimo;
+    printf("%d citazioni [nell'anno %d ]\n", numero_citazioni, anno_citazioni);
 }
+
 
 
 void lvl0_ex4(void) {
 #define MAXLEN 50
     tpubblicazione pubb[MAXLEN];
-    int len = leggiPubblicazioni("src/voti.txt", pubb);
+    int len = leggiPubblicazioni("src/ricercatori.txt", pubb);
 
     int anno;
     printf("Inserire l'anno:\n");
     scanf("%d", &anno);
 
-    int anno_piu_prossimo = trovaAnnoPiuProssimo(pubb, len, anno);
-    printf("Numero di citazioni per l'anno %d:\n", anno_piu_prossimo);
-    for (int i = 0; i < len; i++) {
-        if (pubb[i].anno_pubblicazione == anno_piu_prossimo) {
-            printf("%d \n", pubb[i].numero_citazioni);
-        }
-    }
+    numero_elementi = leggiPubblicazioni(pubb, "src/ricercatori.txt");
+    stampaCitazioniAnnopiuProssimo(pubb, anno, numero_elementi);
 }
 
 /*
