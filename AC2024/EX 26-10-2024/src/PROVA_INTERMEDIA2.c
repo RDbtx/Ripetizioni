@@ -34,24 +34,30 @@ Esempio di file:
 1998 16920
 2010 11042
 */
-int leggiPubblicazioni(const char *nome_file, tpubblicazione *pubb) {
+int leggiPubblicazioni(tpubblicazione *pubb, char *nome_file) {
+
     FILE *fp = fopen(nome_file, "r");
     if (fp == NULL) {
         printf("Errore apertura file\n");
         exit(1);
     }
-    int numero_righe;
-    if (fscanf(fp, "%d", &numero_righe) != 1) {
-        printf("Errore lettura numero di righe\n");
+    int numero_elementi;
+    if (fscanf(fp, "%d", &numero_elementi) != 1) {
+        printf("Errore lettura file\n");
         fclose(fp);
         exit(1);
+    };
+
+    for (int i = 0; i < numero_elementi; i++) {
+       if(fscanf(fp, "%d %d", &pubb[i].anno_pubblicazione, &pubb[i].numero_citazioni) != 2){
+           printf("Errore lettura file\n");
+           fclose(fp);
+           exit(1);
+       };
     }
 
-    for (int index = 0; index < numero_righe; index++) {
-        fscanf(fp, "%d %d", &pubb[index].anno_pubblicazione, &pubb[index].numero_citazioni);
-    }
     fclose(fp);
-    return numero_righe;
+    return numero_elementi;
 }
 
 
