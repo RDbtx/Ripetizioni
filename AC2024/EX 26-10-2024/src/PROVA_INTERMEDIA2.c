@@ -230,7 +230,7 @@ void dealloca(ListaRicercatori *lst) {
 void stampaLista(ListaRicercatori *lst) {
     if (ISEMPTY(lst)) {
         printf("La lista è vuota\n");
-        exit(1);
+        return;
     }
     printf("\nLista dei ricercatori:\n");
     while (!ISEMPTY(lst)) {
