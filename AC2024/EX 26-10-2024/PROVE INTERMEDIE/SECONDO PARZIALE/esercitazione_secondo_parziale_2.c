@@ -164,7 +164,7 @@ int trovaEventoPerNome(evento *eventi, int n, char *nome_evento) {
            eventi[index_evento].data[0],
            eventi[index_evento].data[1],
            eventi[index_evento].data[2]);
-    printf("Partecipanti: %d\n",eventi[index_evento].num_partecipanti);
+    printf("Partecipanti: %d\n", eventi[index_evento].num_partecipanti);
     return index_evento;
 }
 
