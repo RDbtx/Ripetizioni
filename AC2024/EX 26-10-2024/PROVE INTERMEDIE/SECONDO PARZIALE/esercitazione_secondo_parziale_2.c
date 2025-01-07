@@ -132,3 +132,42 @@ int AggiungiPubblicazione(const char *nome_file, tpubblicazione nuova_pubb) {
     printf("Pubblicazione aggiunta con successo al file [%s]\n", nome_file);
     return 0;
 }
+
+/*
+Esercizio 7:
+Scrivere una funzione calcolaMediaCitazioni che riceve un vettore di tipo tpubblicazione
+e la sua dimensione n. La funzione restituisce la media aritmetica del numero di citazioni
+di tutte le pubblicazioni.
+*/
+
+float calcolaMediaCitazioni(tpubblicazione *pubb, int n) {
+    int somma_citazioni = 0;
+
+    for (int i = 0; i < n; i++) {
+        somma_citazioni += pubb[i].numero_citazioni;
+    }
+
+    if (n == 0) {
+        return 0;
+    }
+
+    return (float)somma_citazioni / n;
+}
+
+/*
+Esercizio 8:
+Scrivere una funzione ordinaPerCitazioni che ordina un vettore di tipo tpubblicazione
+in ordine decrescente rispetto al numero di citazioni.
+*/
+
+void ordinaPerCitazioni(tpubblicazione *pubb, int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (pubb[j].numero_citazioni < pubb[j + 1].numero_citazioni) {
+                tpubblicazione temp = pubb[j];
+                pubb[j] = pubb[j + 1];
+                pubb[j + 1] = temp;
+            }
+        }
+    }
+}

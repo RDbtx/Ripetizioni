@@ -33,3 +33,9 @@ int trovapubblicazione(tpubblicazione *pubb, int n, char *titolo);
 
 //Esercizio 6:
 int AggiungiPubblicazione(const char *nome_file, tpubblicazione nuova_pubb);
+
+//Esercizio 7:
+float calcolaMediaCitazioni(tpubblicazione *pubb, int n);
+
+//Esercizio 8:
+void ordinaPerCitazioni(tpubblicazione *pubb, int n);
