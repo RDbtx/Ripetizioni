@@ -1,7 +1,7 @@
 #include <signal.h>
 #include <stdio.h>
 
-#include "esercitazioni_secondo_parziale.h"
+#include "esercitazione_secondo_parziale.h"
 //UTILITY
 void vector_printer(const int *vector, int vlenght) {
     for (int i = 0; i < vlenght; i++) {
