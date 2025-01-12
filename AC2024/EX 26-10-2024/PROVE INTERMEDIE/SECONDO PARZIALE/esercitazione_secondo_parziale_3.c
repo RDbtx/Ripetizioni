@@ -7,7 +7,7 @@ dato un vettore v di tipo tpubblicazione, la sua
 dimensione n, restituisca il minimo valore degli slot anno_pubblicazione.
 */
 
-int estraiAnnoMinimo(tpubbblicazione *pubblicazioni, int n) {
+int estraiAnnoMinimo(tpubblicazione *pubblicazioni, int n) {
     int anno_minimo = pubblicazioni[0].anno_pubblicazione;
     for (int i = 1; i < n; i++) {
         if (pubblicazioni[i].anno_pubblicazione < anno_minimo) {
@@ -93,40 +93,49 @@ void StampaCitTitPerMaxPubb(tpubblicazione *pubb, int N_pubb) {
         }
     }
     printf("L'anno con piu' citazioni e' stato il [%d] con [%d] citazioni\n", anno_maxcit, max_citXanno);
-    printf("[%s] e' la pubblicazione con piu' citazioni [%d]\n",nome_pubb,max_citpubb);
-
+    printf("[%s] e' la pubblicazione con piu' citazioni [%d]\n", nome_pubb, max_citpubb);
 }
 
 /*
 Esercizio 5:
 Scrivere una funzione trovaPubblicazione che:
 Riceve un vettore di tipo tpubblicazione, la sua dimensione n, ed una stringa titolo da cercare.
-Restituisce l’indice della pubblicazione con il titolo corrispondente, oppure -1 se non viene trovato.
+Restituisce l’indice della pubblicazione con il titolo corrispondente, oppure -1 se non viene trovato
+e stampa la pubblicazione trovata.
 */
 
 int trovapubblicazione(tpubblicazione *pubb, int n, char *titolo) {
     for (int i = 0; i < n; i++) {
         if (strcmp(pubb[i].nome_pubb, titolo) == 0) {
+            printf("Pubblicazione:\n");
+            printf("Nome: %s\n", pubb[i].nome_pubb);
+            printf("Anno Pubblicazione: %d\n", pubb[i].anno_pubblicazione);
+            printf("Numero citazioni: %d\n", pubb[i].numero_citazioni);
             return i;
         }
     }
+    printf("Errore! Pubblicazione non trovata");
     return -1;
 }
 
 /*
 Esercizio 6:
-scrivere una funzione aggiungi pubblicazione che aggiunge al file una nuova pubblicazione
+scrivere una funzione sovrascriviFile che sovrascrive il file con la lista tpubblicazione modificata
 */
 
-int AggiungiPubblicazione(const char *nome_file, tpubblicazione nuova_pubb) {
-
-    FILE *file = fopen(nome_file, "a");
+int sovrascriviFile(const char *nome_file, tpubblicazione *pubb, int N_pubb) {
+    FILE *file = fopen(nome_file, "w");
     if (file == NULL) {
         printf("Errore nell'apertura del file\n");
         exit(1);
     }
-
-    fprintf(file, "%d %d %s\n", nuova_pubb.numero_citazioni, nuova_pubb.anno_pubblicazione, nuova_pubb.nome_pubb);
+    fprintf(file, "%d\n", N_pubb);
+    for (int i = 0; i < N_pubb; i++) {
+        fprintf(file, "%d %d %s\n",
+                pubb[i].anno_pubblicazione,
+                pubb[i].numero_citazioni,
+                pubb[i].nome_pubb);
+    }
 
     fclose(file);
     printf("Pubblicazione aggiunta con successo al file [%s]\n", nome_file);
@@ -151,7 +160,7 @@ float calcolaMediaCitazioni(tpubblicazione *pubb, int n) {
         return 0;
     }
 
-    return (float)somma_citazioni / n;
+    return (float) somma_citazioni / n;
 }
 
 /*
@@ -171,3 +180,101 @@ void ordinaPerCitazioni(tpubblicazione *pubb, int n) {
         }
     }
 }
+
+/*
+Esercizio 9:
+Crea una funzione che stampi la struttura tpubblicazioni.
+attenzione alla casistica in cui la struttura fosse vuota.
+*/
+
+void stampaPubblicazioni(tpubblicazione *pubb, int n_pubb) {
+    if (n_pubb == 0) {
+        printf("Nessuna pubblicazione da stampare.\n");
+        return;
+    }
+
+    printf("Elenco delle pubblicazioni:\n");
+    for (int i = 0; i < n_pubb; i++) {
+        printf("%d %d %s\n",
+               pubb[i].anno_pubblicazione,
+               pubb[i].numero_citazioni,
+               pubb[i].nome_pubb);
+    }
+}
+
+/*
+Esercizio 10:
+Crea una funzione creaPubblicazione che aggiunge all' array di strutture tpubblicazione
+un nuovo elemento.
+*/
+
+int aggiungiPubblicazione(tpubblicazione *pubb, int n_pubb, const int maxlen) {
+    if (n_pubb >= maxlen) {
+        printf("Errore, memoria terminata! Impossibile inserire nuove pubblicazioni.");
+        exit(2);
+    }
+
+    printf("Nome pubblicazione:\n");
+    scanf("%s", pubb[n_pubb].nome_pubb);
+    printf("Anno Pubblicazione:\n");
+    scanf("%d", &pubb[n_pubb].anno_pubblicazione);
+    printf("Citazioni pubblicazione:\n");
+    scanf("%d", &pubb[n_pubb].numero_citazioni);
+
+    n_pubb = n_pubb + 1;
+    return n_pubb;
+}
+
+/*
+Esercizio 11:
+Crea una funzione modifica pubblicazione che prendendo in ingresso il vettore tpubblicazione
+e l'indice della pubblicazione da modificare (ottenuto da trovapubblicazione()) permetta di modificarne
+i contenuti.
+*/
+
+void modificaPubblicazione(tpubblicazione *pubb, int index) {
+    if (index == -1) {
+        printf("Errore, pubblicazione inesistente!\n");
+        exit(2);
+    }
+
+    printf("Nuovo nome pubblicazione:\n");
+    scanf("%s", pubb[index].nome_pubb);
+    printf("Nuovo anno di pubblicazione:\n");
+    scanf("%d", &pubb[index].anno_pubblicazione);
+    printf("Nuovo numero di citazioni:\n");
+    scanf("%d", &pubb[index].numero_citazioni);
+
+    printf("Pubblicazione modificata con successo.\n");
+}
+
+/*
+Esercizio 12:
+Crea una funzione che allochi e deallochi dinamicamente la memoria per il vettore tpubblicazioni.
+*/
+
+tpubblicazione *allocaPubblicazioni(const int maxlen) {
+    tpubblicazione *pubblicazioni = malloc(maxlen * sizeof(tpubblicazione));
+    if (pubblicazioni == NULL) {
+        printf("Errore nell'allocazione dinamica della memoria.\n");
+        exit(1);
+    }
+    printf("Allocazione completata per %d pubblicazioni.\n", maxlen);
+    return pubblicazioni;
+}
+
+void deallocaPubblicazioni(tpubblicazione *pubblicazioni) {
+    if (pubblicazioni != NULL) {
+        free(pubblicazioni);
+        printf("Memoria deallocata correttamente.\n");
+    } else {
+        printf("Nessuna memoria da deallocare.\n");
+    }
+}
+
+/*
+Esercizio 12:
+Implementare nel main le funzioni precedentemente scritte per la gestione del database di pubblicazioni.
+L'allocazione della memoria per quanto riguarda il vettore tpubblicazione  dove verranno salvate le pubblicazioni dev'
+essere dinamica.
+*/
