@@ -4,17 +4,23 @@
 Esercizio 2:
 Scrivere una funzione estraiAnnoMinimo che,
 dato un vettore v di tipo tpubblicazione, la sua
-dimensione n, restituisca il minimo valore degli slot anno_pubblicazione.
+dimensione n, restituisca l'elemento del vettore con l'anno minore.
 */
 
-int estraiAnnoMinimo(tpubblicazione *pubblicazioni, int n) {
+void estraiAnnoMinimo(tpubblicazione *pubblicazioni, int n) {
     int anno_minimo = pubblicazioni[0].anno_pubblicazione;
+    int index_prima_pubb = 0;
     for (int i = 1; i < n; i++) {
         if (pubblicazioni[i].anno_pubblicazione < anno_minimo) {
             anno_minimo = pubblicazioni[i].anno_pubblicazione;
+            index_prima_pubb = i;
         }
     }
-    return anno_minimo;
+
+    printf("Pubblicazione:\n");
+    printf("Nome: %s\n",pubblicazioni[index_prima_pubb].nome_pubb);
+    printf("Anno Pubblicazione:: %d\n",pubblicazioni[index_prima_pubb].anno_pubblicazione);
+    printf("Numero Citazioni: %d\n",pubblicazioni[index_prima_pubb].numero_citazioni);
 }
 
 /*
@@ -110,7 +116,7 @@ int trovapubblicazione(tpubblicazione *pubb, int n, char *titolo) {
             printf("Pubblicazione:\n");
             printf("Nome: %s\n", pubb[i].nome_pubb);
             printf("Anno Pubblicazione: %d\n", pubb[i].anno_pubblicazione);
-            printf("Numero citazioni: %d\n", pubb[i].numero_citazioni);
+            printf("Numero Citazioni: %d\n", pubb[i].numero_citazioni);
             return i;
         }
     }
@@ -139,7 +145,6 @@ void sovrascriviFile(const char *nome_file, tpubblicazione *pubb, int N_pubb) {
 
     fclose(file);
     printf("Pubblicazione aggiunta con successo al file [%s]\n", nome_file);
-    return;
 }
 
 /*
@@ -278,3 +283,80 @@ Implementare nel main le funzioni precedentemente scritte per la gestione del da
 L'allocazione della memoria per quanto riguarda il vettore tpubblicazione  dove verranno salvate le pubblicazioni dev'
 essere dinamica.
 */
+#define MAX_PUBB 100
+void program_main() {
+    tpubblicazione *pubblicazioni = allocaPubblicazioni(MAX_PUBB);
+
+    int numeroPubblicazioni = 0;
+    int choice;
+
+    char nome_file[] = "database.txt";
+
+
+    do {
+        printf("\n\nMenu:\n");
+        printf("1. Leggi pubblicazioni da file\n");
+        printf("2. Stampa citazioni e titoli per massima pubblicazione\n");
+        printf("3. Trova una pubblicazione per titolo\n");
+        printf("4. Sovrascrivi file\n");
+        printf("5. Calcola media citazioni\n");
+        printf("6. Ordina per citazioni\n");
+        printf("7. Stampa tutte le pubblicazioni\n");
+        printf("8. Aggiungi una pubblicazione\n");
+        printf("9. Modifica una pubblicazione\n");
+        printf("10.Stampa prima pubblicazione\n");
+        printf("11. Esci\n");
+        printf("Inserisci la tua scelta: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                numeroPubblicazioni = leggiPubblicazioniDaFile(nome_file, pubblicazioni);
+                break;
+            case 2:
+                StampaCitTitPerMaxPubb(pubblicazioni, numeroPubblicazioni);
+                break;
+            case 3:
+                char titolo[50];
+                printf("inserire titolo da trovare:\n");
+                scanf("%s", titolo);
+                int current_index = trovapubblicazione(pubblicazioni, numeroPubblicazioni, titolo);
+                break;
+            case 4:
+                sovrascriviFile(nome_file, pubblicazioni, numeroPubblicazioni);
+                break;
+            case 5:
+                float media = calcolaMediaCitazioni(pubblicazioni, numeroPubblicazioni);
+                printf("media citazioni = [%.2f]\n", media);
+                break;
+            case 6:
+                ordinaPerCitazioni(pubblicazioni, numeroPubblicazioni);
+                printf("lista ordinata per citazioni!");
+                break;
+            case 7:
+                stampaPubblicazioni(pubblicazioni, numeroPubblicazioni);
+                break;
+            case 8:
+                numeroPubblicazioni = aggiungiPubblicazione(pubblicazioni, numeroPubblicazioni, MAX_PUBB);
+                printf("pubblicazione aggiunta!\n");
+                break;
+            case 9:
+                printf("inserire titolo pubblicazione da modificare:\n");
+                scanf("%s", titolo);
+                current_index = trovapubblicazione(pubblicazioni, numeroPubblicazioni, titolo);
+                if (current_index == -1) {
+                    break;
+                }
+                modificaPubblicazione(pubblicazioni, current_index);
+                break;
+            case 10:
+                estraiAnnoMinimo(pubblicazioni, numeroPubblicazioni);
+                break;
+            case 11:
+                printf("chiusura programma!\n");
+                break;
+            default:
+                printf("Scelta non valida. Riprova.\n");
+        }
+    } while (choice != 11);
+    deallocaPubblicazioni(pubblicazioni);
+}
