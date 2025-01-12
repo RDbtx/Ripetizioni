@@ -7,11 +7,11 @@ dato un vettore v di tipo tpubblicazione, la sua
 dimensione n, restituisca il minimo valore degli slot anno_pubblicazione.
 */
 
-int estraiAnnoMinimo(int *anno_pubblicazione, int n) {
-    int anno_minimo = anno_pubblicazione[0];
+int estraiAnnoMinimo(tpubbblicazione *pubblicazioni, int n) {
+    int anno_minimo = pubblicazioni[0].anno_pubblicazione;
     for (int i = 1; i < n; i++) {
-        if (anno_pubblicazione[i] < anno_minimo) {
-            anno_minimo = anno_pubblicazione[i];
+        if (pubblicazioni[i].anno_pubblicazione < anno_minimo) {
+            anno_minimo = pubblicazioni[i].anno_pubblicazione;
         }
     }
     return anno_minimo;
