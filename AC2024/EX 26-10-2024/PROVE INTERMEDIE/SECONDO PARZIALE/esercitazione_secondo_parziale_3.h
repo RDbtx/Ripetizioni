@@ -33,10 +33,23 @@ void StampaCitTitPerMaxPubb(tpubblicazione *pubb, int N_pubb);
 int trovapubblicazione(tpubblicazione *pubb, int n, char *titolo);
 
 //Esercizio 6:
-int AggiungiPubblicazione(const char *nome_file, tpubblicazione nuova_pubb);
+int sovrascriviFile(const char *nome_file, tpubblicazione *pubb, int N_pubb);
 
 //Esercizio 7:
 float calcolaMediaCitazioni(tpubblicazione *pubb, int n);
 
 //Esercizio 8:
 void ordinaPerCitazioni(tpubblicazione *pubb, int n);
+
+//Esercizio 9:
+void stampaPubblicazioni(tpubblicazione *pubb, int n_pubb);
+
+//Esercizio 10:
+int aggiungiPubblicazione(tpubblicazione *pubb, int n_pubb, int maxlen);
+
+//Esercizio 11:
+void modificaPubblicazione(tpubblicazione *pubb, int index);
+
+//Esercizio 12:
+tpubblicazione *allocaPubblicazioni(int maxlen);
+void deallocaPubblicazioni(tpubblicazione *pubblicazioni);
