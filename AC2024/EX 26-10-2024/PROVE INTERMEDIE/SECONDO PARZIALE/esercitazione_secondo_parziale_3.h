@@ -21,7 +21,7 @@ typedef struct pubblicazione {
 } tpubblicazione;
 
 //Esercizio 2:
-int estraiAnnoMinimo(int *anno_pubblicazione, int n);
+void estraiAnnoMinimo(tpubblicazione *pubblicazioni, int n);
 
 //Esercizio 3:
 int leggiPubblicazioniDaFile(char *nome_file, tpubblicazione *pubb);
@@ -33,7 +33,7 @@ void StampaCitTitPerMaxPubb(tpubblicazione *pubb, int N_pubb);
 int trovapubblicazione(tpubblicazione *pubb, int n, char *titolo);
 
 //Esercizio 6:
-void sovrascriviFile(char *nome_file, tpubblicazione *pubb, int N_pubb);
+void sovrascriviFile(const char *nome_file, tpubblicazione *pubb, int N_pubb);
 
 //Esercizio 7:
 float calcolaMediaCitazioni(tpubblicazione *pubb, int n);
@@ -53,3 +53,6 @@ void modificaPubblicazione(tpubblicazione *pubb, int index);
 //Esercizio 12:
 tpubblicazione *allocaPubblicazioni(int maxlen);
 void deallocaPubblicazioni(tpubblicazione *pubblicazioni);
+
+//Esercizio 13:
+void program_main();
