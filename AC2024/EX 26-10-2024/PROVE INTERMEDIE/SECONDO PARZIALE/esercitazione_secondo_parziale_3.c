@@ -18,9 +18,9 @@ void estraiAnnoMinimo(tpubblicazione *pubblicazioni, int n) {
     }
 
     printf("Pubblicazione:\n");
-    printf("Nome: %s\n",pubblicazioni[index_prima_pubb].nome_pubb);
-    printf("Anno Pubblicazione:: %d\n",pubblicazioni[index_prima_pubb].anno_pubblicazione);
-    printf("Numero Citazioni: %d\n",pubblicazioni[index_prima_pubb].numero_citazioni);
+    printf("Nome: %s\n", pubblicazioni[index_prima_pubb].nome_pubb);
+    printf("Anno Pubblicazione:: %d\n", pubblicazioni[index_prima_pubb].anno_pubblicazione);
+    printf("Numero Citazioni: %d\n", pubblicazioni[index_prima_pubb].numero_citazioni);
 }
 
 /*
@@ -278,12 +278,13 @@ void deallocaPubblicazioni(tpubblicazione *pubblicazioni) {
 }
 
 /*
-Esercizio 12:
+Esercizio 13:
 Implementare nel main le funzioni precedentemente scritte per la gestione del database di pubblicazioni.
 L'allocazione della memoria per quanto riguarda il vettore tpubblicazione  dove verranno salvate le pubblicazioni dev'
 essere dinamica.
 */
 #define MAX_PUBB 100
+
 void program_main() {
     tpubblicazione *pubblicazioni = allocaPubblicazioni(MAX_PUBB);
 
