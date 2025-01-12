@@ -123,7 +123,7 @@ Esercizio 6:
 scrivere una funzione sovrascriviFile che sovrascrive il file con la lista tpubblicazione modificata
 */
 
-int sovrascriviFile(const char *nome_file, tpubblicazione *pubb, int N_pubb) {
+void sovrascriviFile(const char *nome_file, tpubblicazione *pubb, int N_pubb) {
     FILE *file = fopen(nome_file, "w");
     if (file == NULL) {
         printf("Errore nell'apertura del file\n");
@@ -139,7 +139,7 @@ int sovrascriviFile(const char *nome_file, tpubblicazione *pubb, int N_pubb) {
 
     fclose(file);
     printf("Pubblicazione aggiunta con successo al file [%s]\n", nome_file);
-    return 0;
+    return;
 }
 
 /*
