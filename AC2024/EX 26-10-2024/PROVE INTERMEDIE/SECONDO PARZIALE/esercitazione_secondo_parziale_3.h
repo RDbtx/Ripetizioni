@@ -10,7 +10,8 @@
 /*
 Esercizio 1:
 Definire una struttura dati tpubblicazione caratterizzata da
-un intero numero_citazioni e un intero anno_pubblicazione.
+un intero numero_citazioni e un intero anno_pubblicazione
+e una stringa nome_pubb.
 */
 
 typedef struct pubblicazione {
