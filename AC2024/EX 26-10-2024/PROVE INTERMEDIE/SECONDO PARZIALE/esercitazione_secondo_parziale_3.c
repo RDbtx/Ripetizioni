@@ -239,8 +239,7 @@ int aggiungiPubblicazione(tpubblicazione *pubb, int n_pubb, const int maxlen) {
 /*
 Esercizio 11:
 Crea una funzione modifica pubblicazione che prendendo in ingresso il vettore tpubblicazione
-e l'indice della pubblicazione da modificare (ottenuto da trovapubblicazione()) permetta di modificarne
-i contenuti.
+e l'indice della pubblicazione da modificare (ottenuto da trovapubblicazione()).
 */
 
 void modificaPubblicazione(tpubblicazione *pubb, int index) {
