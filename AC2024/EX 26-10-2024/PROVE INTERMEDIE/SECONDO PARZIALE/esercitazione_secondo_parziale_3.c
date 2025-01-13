@@ -44,7 +44,7 @@ ESEMPIO FILE:
 
 */
 
-int leggiPubblicazioniDaFile(char *nome_file, tpubblicazione *pubb) {
+int leggiPubblicazioniDaFile(char *nome_file, tpubblicazione *pubb, int maxlen) {
     FILE *f = fopen(nome_file, "r");
     if (f == NULL) {
         printf("Errore apertura file\n");
@@ -54,6 +54,12 @@ int leggiPubblicazioniDaFile(char *nome_file, tpubblicazione *pubb) {
     int N_pubb;
     if (fscanf(f, "%d", &N_pubb) != 1) {
         printf("Errore lettura numero di pubblicazioni\n");
+        fclose(f);
+        exit(1);
+    }
+
+    if(N_pubb > maxlen){
+        printf("il numero di pubblicazionie presenti eccede la memoria disponibile al porgramma!");
         fclose(f);
         exit(1);
     }
@@ -311,7 +317,7 @@ void program_main() {
         scanf("%d", &choice);
         switch (choice) {
             case 1:
-                numeroPubblicazioni = leggiPubblicazioniDaFile(nome_file, pubblicazioni);
+                numeroPubblicazioni = leggiPubblicazioniDaFile(nome_file, pubblicazioni, MAX_PUBB);
                 break;
             case 2:
                 StampaCitTitPerMaxPubb(pubblicazioni, numeroPubblicazioni);
